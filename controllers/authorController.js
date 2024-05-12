@@ -1,9 +1,9 @@
 import Author from '../models/author.js';
 import asyncHandler from 'express-async-handler';
 
-export const author_list = asyncHandler(async (req, res, next) => {
+export const authorList = asyncHandler(async (req, res, next) => {
   const allAuthors = await Author.find().sort({ family_name: 1 }).exec();
-  res.render('author_list', {
+  res.render('authorList', {
     title: 'Author List',
     author_list: allAuthors,
   });
