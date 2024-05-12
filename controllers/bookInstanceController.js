@@ -1,8 +1,13 @@
 import BookInstance from '../models/bookInstance.js';
 import asyncHandler from 'express-async-handler';
 
-export const bookinstance_list = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: BookInstance list');
+export const bookInstanceList = asyncHandler(async (req, res, next) => {
+  const allBookInstances = await BookInstance.find().populate('book').exec();
+
+  res.render('bookInstanceList', {
+    title: 'Book Instance List',
+    bookinstance_list: allBookInstances,
+  });
 });
 
 export const bookinstance_detail = asyncHandler(async (req, res, next) => {
