@@ -1,14 +1,24 @@
 import createError from 'http-errors';
 import express from 'express';
-import path, { dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const mongoDB =
+  'mongodb+srv://admin:Rmere140800@cluster0.o6tvbut.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0';
 const app = express();
+
+mongoose.set('strictQuery', false);
+
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
+main().catch((err) => console.log(err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
