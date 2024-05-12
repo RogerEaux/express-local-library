@@ -36,7 +36,7 @@ export const bookList = asyncHandler(async (req, res, next) => {
     .populate('author')
     .exec();
 
-  res.render('book_list', { title: 'Book List', book_list: allBooks });
+  res.render('bookList', { title: 'Book List', book_list: allBooks });
 });
 
 export const book_detail = asyncHandler(async (req, res, next) => {
