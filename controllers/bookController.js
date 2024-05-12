@@ -30,8 +30,13 @@ export const index = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const book_list = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Book list');
+export const bookList = asyncHandler(async (req, res, next) => {
+  const allBooks = await Book.find({}, 'title author')
+    .sort({ title: 1 })
+    .populate('author')
+    .exec();
+
+  res.render('book_list', { title: 'Book List', book_list: allBooks });
 });
 
 export const book_detail = asyncHandler(async (req, res, next) => {
