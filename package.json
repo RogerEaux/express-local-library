@@ -2,7 +2,7 @@
   "name": "express-local-library",
   "version": "0.0.0",
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=16.x"
   },
   "private": true,
   "type": "module",
