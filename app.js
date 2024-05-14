@@ -13,11 +13,11 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = process.env.MONGODB_URI;
 const app = express();
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 20,
+  max: 250,
 });
 
 mongoose.set('strictQuery', false);
