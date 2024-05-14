@@ -36,7 +36,7 @@ export const bookList = asyncHandler(async (req, res, next) => {
     .populate('author')
     .exec();
 
-  res.render('bookList', { title: 'Book List', book_list: allBooks });
+  res.render('book/bookList', { title: 'Book List', book_list: allBooks });
 });
 
 export const bookDetail = asyncHandler(async (req, res, next) => {
@@ -51,7 +51,7 @@ export const bookDetail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('bookDetail', {
+  res.render('book/bookDetail', {
     title: book.title,
     book: book,
     book_instances: bookInstances,
@@ -64,7 +64,7 @@ export const bookCreateGet = asyncHandler(async (req, res, next) => {
     Genre.find().sort({ name: 1 }).exec(),
   ]);
 
-  res.render('bookForm', {
+  res.render('book/bookForm', {
     title: 'Create Book',
     authors: allAuthors,
     genres: allGenres,
@@ -117,7 +117,7 @@ export const bookCreatePost = [
           genre.checked = 'true';
         }
       }
-      res.render('bookForm', {
+      res.render('book/bookForm', {
         title: 'Create Book',
         authors: allAuthors,
         genres: allGenres,
@@ -143,7 +143,7 @@ export const bookDeleteGet = asyncHandler(async (req, res, next) => {
     res.redirect('/catalog/books');
   }
 
-  res.render('bookDelete', {
+  res.render('book/bookDelete', {
     title: 'Delete Author',
     book: book,
     book_instances: bookInstances,
@@ -157,7 +157,7 @@ export const bookDeletePost = asyncHandler(async (req, res, next) => {
   ]);
 
   if (bookInstances.length > 0) {
-    res.render('bookDelete', {
+    res.render('book/bookDelete', {
       title: 'Delete Book',
       book: book,
       book_instances: bookInstances,
@@ -187,7 +187,7 @@ export const bookUpdateGet = asyncHandler(async (req, res, next) => {
     if (book.genre.includes(genre._id)) genre.checked = 'true';
   });
 
-  res.render('bookForm', {
+  res.render('book/bookForm', {
     title: 'Update Book',
     authors: allAuthors,
     genres: allGenres,
@@ -243,7 +243,7 @@ export const bookUpdatePost = [
         }
       }
 
-      res.render('bookForm', {
+      res.render('book/bookForm', {
         title: 'Update Book',
         authors: allAuthors,
         genres: allGenres,

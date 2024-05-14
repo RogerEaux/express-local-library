@@ -5,7 +5,7 @@ import { body, validationResult } from 'express-validator';
 
 export const authorList = asyncHandler(async (req, res, next) => {
   const allAuthors = await Author.find().sort({ family_name: 1 }).exec();
-  res.render('authorList', {
+  res.render('author/authorList', {
     title: 'Author List',
     author_list: allAuthors,
   });
@@ -23,7 +23,7 @@ export const authorDetail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('authorDetail', {
+  res.render('author/authorDetail', {
     title: 'Author Detail',
     author: author,
     author_books: authorBooks,
@@ -31,7 +31,7 @@ export const authorDetail = asyncHandler(async (req, res, next) => {
 });
 
 export const authorCreateGet = asyncHandler(async (req, res, next) => {
-  res.render('authorForm', { title: 'Create Author' });
+  res.render('author/authorForm', { title: 'Create Author' });
 });
 
 export const authorCreatePost = [
@@ -69,7 +69,7 @@ export const authorCreatePost = [
     });
 
     if (!errors.isEmpty()) {
-      res.render('author_form', {
+      res.render('author/authorForm', {
         title: 'Create Author',
         author: author,
         errors: errors.array(),
@@ -94,7 +94,7 @@ export const authorDeleteGet = asyncHandler(async (req, res, next) => {
     res.redirect('/catalog/authors');
   }
 
-  res.render('authorDelete', {
+  res.render('author/authorDelete', {
     title: 'Delete Author',
     author: author,
     author_books: authorBooks,
@@ -108,7 +108,7 @@ export const authorDeletePost = asyncHandler(async (req, res, next) => {
   ]);
 
   if (authorBooks.length > 0) {
-    res.render('authorDelete', {
+    res.render('author/authorDelete', {
       title: 'Delete Author',
       author: author,
       author_books: authorBooks,
@@ -130,7 +130,7 @@ export const authorUpdateGet = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('authorForm', {
+  res.render('author/authorForm', {
     title: 'Update Author',
     author: author,
   });
@@ -172,7 +172,7 @@ export const authorUpdatePost = [
     });
 
     if (!errors.isEmpty()) {
-      res.render('authorForm', {
+      res.render('author/authorForm', {
         title: 'Update Author',
         author: author,
         errors: errors.array(),

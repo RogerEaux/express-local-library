@@ -6,7 +6,7 @@ import { body, validationResult } from 'express-validator';
 export const genreList = asyncHandler(async (req, res, next) => {
   const allGenres = await Genre.find({}, 'name').sort({ name: 1 }).exec();
 
-  res.render('genreList', { title: 'Genre List', genre_list: allGenres });
+  res.render('genre/genreList', { title: 'Genre List', genre_list: allGenres });
 });
 
 export const genreDetail = asyncHandler(async (req, res, next) => {
@@ -21,7 +21,7 @@ export const genreDetail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('genreDetail', {
+  res.render('genre/genreDetail', {
     title: 'Genre Detail',
     genre: genre,
     genre_books: genreBooks,
@@ -29,7 +29,7 @@ export const genreDetail = asyncHandler(async (req, res, next) => {
 });
 
 export const genreCreateGet = async (req, res, next) => {
-  res.render('genreForm', { title: 'Create Genre' });
+  res.render('genre/genreForm', { title: 'Create Genre' });
 };
 
 export const genreCreatePost = [
@@ -44,7 +44,7 @@ export const genreCreatePost = [
     const genre = new Genre({ name: req.body.name });
 
     if (!errors.isEmpty()) {
-      res.render('genreForm', {
+      res.render('genre/genreForm', {
         title: 'Create Genre',
         genre: genre,
         errors: errors.array(),
@@ -78,7 +78,7 @@ export const genreDeleteGet = asyncHandler(async (req, res, next) => {
     res.redirect('/catalog/genres');
   }
 
-  res.render('genreDelete', {
+  res.render('genre/genreDelete', {
     title: 'Delete Genre',
     genre: genre,
     genre_books: genreBooks,
@@ -92,7 +92,7 @@ export const genreDeletePost = asyncHandler(async (req, res, next) => {
   ]);
 
   if (genreBooks.length > 0) {
-    res.render('genreDelete', {
+    res.render('genre/genreDelete', {
       title: 'Delete Genre',
       genre: genre,
       genre_books: genreBooks,
@@ -114,7 +114,7 @@ export const genreUpdateGet = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('genreForm', {
+  res.render('genre/genreForm', {
     title: 'Update Genre',
     genre: genre,
   });
@@ -135,7 +135,7 @@ export const genreUpdatePost = [
     });
 
     if (!errors.isEmpty()) {
-      res.render('genreForm', {
+      res.render('genre/genreForm', {
         title: 'Update Genre',
         genre: genre,
         errors: errors.array(),

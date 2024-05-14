@@ -6,7 +6,7 @@ import { body, validationResult } from 'express-validator';
 export const bookInstanceList = asyncHandler(async (req, res, next) => {
   const allBookInstances = await BookInstance.find().populate('book').exec();
 
-  res.render('bookInstanceList', {
+  res.render('bookInstance/bookInstanceList', {
     title: 'Book Instance List',
     bookinstance_list: allBookInstances,
   });
@@ -23,7 +23,7 @@ export const bookinstanceDetail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('bookInstanceDetail', {
+  res.render('bookInstance/bookInstanceDetail', {
     title: 'Book:',
     bookinstance: bookInstance,
   });
@@ -32,7 +32,7 @@ export const bookinstanceDetail = asyncHandler(async (req, res, next) => {
 export const bookInstanceCreateGet = asyncHandler(async (req, res, next) => {
   const allBooks = await Book.find({}, 'title').sort({ title: 1 }).exec();
 
-  res.render('bookInstanceForm', {
+  res.render('bookInstance/bookInstanceForm', {
     title: 'Create BookInstance',
     book_list: allBooks,
   });
@@ -63,7 +63,7 @@ export const bookInstanceCreatePost = [
     if (!errors.isEmpty()) {
       const allBooks = await Book.find({}, 'title').sort({ title: 1 }).exec();
 
-      res.render('bookInstanceForm', {
+      res.render('bookInstance/bookInstanceForm', {
         title: 'Create BookInstance',
         book_list: allBooks,
         selected_book: bookInstance.book._id,
@@ -88,7 +88,7 @@ export const bookInstanceDeleteGet = asyncHandler(async (req, res, next) => {
     res.redirect('/catalog/bookinstances');
   }
 
-  res.render('bookInstanceDelete', {
+  res.render('bookInstance/bookInstanceDelete', {
     title: 'Delete Book Instance',
     bookinstance: bookInstance,
   });
@@ -113,7 +113,7 @@ export const bookInstanceUpdateGet = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render('bookInstanceForm', {
+  res.render('bookInstance/bookInstanceForm', {
     title: 'Update Book Instance',
     bookinstance: bookInstance,
     book_list: allBooks,
@@ -146,7 +146,7 @@ export const bookInstanceUpdatePost = [
     if (!errors.isEmpty()) {
       const allBooks = await Book.find({}, 'title').exec();
 
-      res.render('bookInstanceForm', {
+      res.render('bookInstance/bookInstanceForm', {
         title: 'Update Book Instance',
         book_list: allBooks,
         selected_book: bookInstance.book._id,
