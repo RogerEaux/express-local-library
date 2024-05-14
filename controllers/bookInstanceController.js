@@ -12,7 +12,7 @@ export const bookInstanceList = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const bookinstanceDetail = asyncHandler(async (req, res, next) => {
+export const bookInstanceDetail = asyncHandler(async (req, res, next) => {
   const bookInstance = await BookInstance.findById(req.params.id)
     .populate('book')
     .exec();
@@ -24,7 +24,7 @@ export const bookinstanceDetail = asyncHandler(async (req, res, next) => {
   }
 
   res.render('bookInstance/bookInstanceDetail', {
-    title: 'Book:',
+    title: 'Book Instance',
     bookinstance: bookInstance,
   });
 });

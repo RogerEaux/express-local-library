@@ -80,7 +80,7 @@ router.post(
   bookInstanceController.bookInstanceUpdatePost
 );
 
-router.get('/bookinstance/:id', bookInstanceController.bookinstanceDetail);
+router.get('/bookinstance/:id', bookInstanceController.bookInstanceDetail);
 router.get('/bookinstances', bookInstanceController.bookInstanceList);
 
 export default router;
