@@ -2,6 +2,8 @@
 
 This project is a website that provides a catalog for a small local library where users can browse available books, authors, genres and book instances. It was created as practice on using the Express framework, managing a Mongo database, creating models using Mongoose, creating views using Pug and creating controllers to handle requests.
 
+[Checkout the live version here](https://voltaic-grass-city.glitch.me)
+
 ## Features
 
 - Routes: The site is structured in different main routes: catalog, books, authors, genres and bookinstances.
