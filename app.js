@@ -8,11 +8,17 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import catalogRouter from './routes/catalog.js';
 import mongoose from 'mongoose';
+import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const mongoDB =
-  'mongodb+srv://admin:Rmere140800@cluster0.o6tvbut.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0';
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 const app = express();
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 20,
+});
 
 mongoose.set('strictQuery', false);
 
@@ -30,6 +36,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(compression());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      'script-src': ["'self'", 'code.jquery.com', 'cdn.jsdelivr.net'],
+    },
+  })
+);
+app.use(limiter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
