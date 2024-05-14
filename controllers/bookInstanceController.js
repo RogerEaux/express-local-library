@@ -33,7 +33,7 @@ export const bookInstanceCreateGet = asyncHandler(async (req, res, next) => {
   const allBooks = await Book.find({}, 'title').sort({ title: 1 }).exec();
 
   res.render('bookInstance/bookInstanceForm', {
-    title: 'Create BookInstance',
+    title: 'Create Book Instance',
     book_list: allBooks,
   });
 });
@@ -64,7 +64,7 @@ export const bookInstanceCreatePost = [
       const allBooks = await Book.find({}, 'title').sort({ title: 1 }).exec();
 
       res.render('bookInstance/bookInstanceForm', {
-        title: 'Create BookInstance',
+        title: 'Create Book Instance',
         book_list: allBooks,
         selected_book: bookInstance.book._id,
         errors: errors.array(),
@@ -142,7 +142,7 @@ export const bookInstanceUpdatePost = [
       due_back: req.body.due_back,
       _id: req.params.id,
     });
-
+    s;
     if (!errors.isEmpty()) {
       const allBooks = await Book.find({}, 'title').exec();
 
